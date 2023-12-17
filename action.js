@@ -2,7 +2,6 @@ let a = '';
 let b = '';
 let sign = '';
 let finish = false;
-let ans = [];
 
 const display = document.querySelector('.display');
 const buttons = Array.from(document.querySelectorAll('.buttons'));
@@ -20,10 +19,10 @@ function clearAll() {
     display.textContent = '0';
 }
 
-// document.querySelector('.ac').onclick = clearAll;
+//document.querySelector('.ac').onclick = clearAll();
 
 buttons.map((button) => {
-    button.addEventListener("click", (e) => {
+    button.addEventListener('click', (e) => {
         if (!e.target.classList.contains('button')) return;
         if (e.target.classList.contains('ac')) {
             document.querySelector('.ac').onclick = clearAll;
@@ -37,24 +36,22 @@ buttons.map((button) => {
             if (b === '' && sign === '') {
                 a += key;
                 display.textContent = a;
-            } 
-            // else if (a !== '' && b !== '' && finish === true) {
-            //     b = key;
-            //     finish = false;
-            //     display.textContent = b;
-            //     console.log(`here a !== '' && b !== '' && finish === true: ${finish}`)
-            //     console.log(a, b, sign, finish);
-            // } 
-            else {
+            } else {
                 b += key;
                 display.textContent = b;
             }
-            //console.log(a, b, sign, finish);
         }
 
         if (action.includes(key)) {
-            sign = key;
-            display.textContent = sign;
+            if (b != '') {
+                a = calculate(a, b, sign);
+                b = '';
+                sign = key;
+                display.textContent = sign;
+            } else {
+                sign = key;
+                display.textContent = sign;
+            }
         }
 
         if (key === sign_change) {
@@ -86,13 +83,13 @@ buttons.map((button) => {
         }
 
         if (key === '=') {
-             if (b === '') {
-                 a = calculate(a, b, sign);
-             } else {
-                 a = calculate(a, b, sign);
-                 b = '';
-             }
-        };
+            if (b === '') {
+                a = calculate(a, b, sign);
+            } else {
+                a = calculate(a, b, sign);
+                b = '';
+            }
+        }
     });
 });
 
@@ -116,7 +113,6 @@ function calculate(a, b, sign) {
                 a = '';
                 b = '';
                 sign = '';
-                finish = false;
                 return;
             }
             a = a / b;
@@ -124,8 +120,7 @@ function calculate(a, b, sign) {
         case '%':
             a = a / 100;
             break;
-    };
-    finish = true;
+    }
     display.textContent = a;
     return a;
 }

@@ -5,17 +5,22 @@
 }
 
 body {
-    background: linear-gradient(227deg, rgba(2,0,36,1) 0%, rgba(121,9,9,1) 69%, rgba(255,0,0,1) 100%);
+    background: linear-gradient(
+        227deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(121, 9, 9, 1) 69%,
+        rgba(255, 0, 0, 1) 100%
+    );
     background-repeat: no-repeat;
 }
 
 .calculator {
     position: relative;
     width: 470px;
-    margin: 110px auto;
+    margin: 50px auto;
     border-radius: 20px;
+    box-shadow: 10px -9px 14px -1px rgba(0, 0, 0, 0.58);
     background-color: black;
-    box-shadow: 10px -9px 14px -1px rgba(0,0,0,0.58);
 }
 
 .calculator::before {
@@ -33,10 +38,10 @@ body {
 
 .display {
     padding: 40px 20px 0 0;
+    overflow: hidden;
     color: white;
     font-size: 90px;
     text-align: end;
-    overflow: hidden;
 }
 
 .buttons {
